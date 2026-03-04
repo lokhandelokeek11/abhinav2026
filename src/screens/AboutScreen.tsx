@@ -6,28 +6,32 @@ import { typography } from '../theme/typography';
 
 export const AboutScreen = () => {
     return (
-        <ScrollView style={styles.container}>
-            <View style={styles.heroSection}>
-                <Text style={styles.logo}>🎓</Text>
-                <Text style={styles.title}>Abhinav 2026</Text>
-                <Text style={styles.subtitle}>Young Professional Conference</Text>
-            </View>
+      <ScrollView style={styles.container}>
+        <View style={styles.heroSection}>
+          <Text style={styles.logo}>🎓</Text>
+          <Text style={styles.title}>Abhinav 2026</Text>
+          <Text style={styles.subtitle}>Young Professional Conference</Text>
+        </View>
 
-            <View style={styles.contentSection}>
-                <Text style={styles.heading}>About</Text>
-                <Text style={styles.paragraph}>
-                    Welcome to the Abhinav 2026 Young Professional Conference. This annual gathering brings together the brightest minds and most innovative thinkers across multiple disciplines.
-                </Text>
-                <Text style={styles.paragraph}>
-                    Our mission is to foster collaboration, spark new ideas, and provide a platform for young professionals to showcase their cutting-edge research and projects.
-                </Text>
+        <View style={styles.contentSection}>
+          <Text style={styles.heading}>About</Text>
+          <Text style={styles.paragraph}>
+            Welcome to the Abhinav 2026 Young Professional Conference. This
+            annual gathering brings together the brightest minds and most
+            innovative thinkers across multiple disciplines.
+          </Text>
+          <Text style={styles.paragraph}>
+            Our mission is to foster collaboration, spark new ideas, and provide
+            a platform for young professionals to showcase their cutting-edge
+            research and projects.
+          </Text>
 
-                <Text style={styles.heading}>Contact Information</Text>
-                <Text style={styles.paragraph}>Email: contact@abhinav2026.org</Text>
-                <Text style={styles.paragraph}>Phone: +1 (555) 123-4567</Text>
-                <Text style={styles.paragraph}>Address: 123 Innovation Drive, Tech City, TC 90210</Text>
-            </View>
-        </ScrollView>
+          <Text style={styles.heading}>Contact Information</Text>
+          <Text style={styles.paragraph}>Email: contact@abhinav2026.org</Text>
+          <Text style={styles.paragraph}>Phone: 020 - 2760 0050</Text>
+          <Text style={styles.paragraph}>Address: Pimpri Chinchwad College of Engineering, Nigdi, Pune-411033</Text>
+        </View>
+      </ScrollView>
     );
 };
 
