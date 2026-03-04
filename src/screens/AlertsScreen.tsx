@@ -38,7 +38,6 @@ export const AlertsScreen = () => {
         </View>
     );
 };
-
 const styles = StyleSheet.create({
     container: {
         flex: 1,
