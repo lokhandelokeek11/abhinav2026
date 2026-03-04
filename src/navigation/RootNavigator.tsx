@@ -5,6 +5,9 @@ import { SplashScreen } from '../screens/SplashScreen';
 import { TabNavigator } from './TabNavigator';
 import { VenueScreen } from '../screens/VenueScreen';
 import { AboutScreen } from '../screens/AboutScreen';
+import { CommitteeScreen } from '../screens/CommitteeScreen';
+import { GuidelinesScreen } from '../screens/GuidelinesScreen';
+import { ConferenceTracksScreen } from '../screens/ConferenceTracksScreen';
 import { colors } from '../theme/colors';
 
 const Stack = createNativeStackNavigator();
@@ -40,6 +43,27 @@ export const RootNavigator = () => {
                         title: 'About',
                         headerStyle: { backgroundColor: colors.primary },
                         headerTintColor: colors.surface,
+                    }}
+                />
+                <Stack.Screen
+                    name="Committee"
+                    component={CommitteeScreen}
+                    options={{
+                        headerShown: false,
+                    }}
+                />
+                <Stack.Screen
+                    name="Guidelines"
+                    component={GuidelinesScreen}
+                    options={{
+                        headerShown: false,
+                    }}
+                />
+                <Stack.Screen
+                    name="ConferenceTracks"
+                    component={ConferenceTracksScreen}
+                    options={{
+                        headerShown: false,
                     }}
                 />
             </Stack.Navigator>
