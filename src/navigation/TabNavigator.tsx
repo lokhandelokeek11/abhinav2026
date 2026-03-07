@@ -24,7 +24,7 @@ export const TabNavigator = () => {
                         iconName = focused ? 'notifications' : 'notifications-outline';
                     } else if (route.name === 'Schedule') {
                         iconName = focused ? 'calendar' : 'calendar-outline';
-                    } else if (route.name === 'Papers') {
+                    } else if (route.name === 'Search') {
                         iconName = focused ? 'search' : 'search-outline';
                     } else if (route.name === 'Options') {
                         iconName = focused ? 'menu' : 'menu-outline';
@@ -47,7 +47,7 @@ export const TabNavigator = () => {
             <Tab.Screen name="Home" component={HomeScreen} />
             <Tab.Screen name="Alerts" component={AlertsScreen} />
             <Tab.Screen name="Schedule" component={ScheduleScreen} />
-            <Tab.Screen name="Papers" component={SearchScreen} />
+            <Tab.Screen name="Search" component={SearchScreen} />
             <Tab.Screen name="Options" component={OptionsScreen} />
         </Tab.Navigator>
     );
