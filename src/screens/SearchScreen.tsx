@@ -8,6 +8,7 @@ import {
     TextInput,
     SafeAreaView,
 } from 'react-native';
+import { useRoute } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { spacing } from '../theme/spacing';
 import { typography } from '../theme/typography';
@@ -25,11 +26,11 @@ const THEME_COLORS = {
 };
 
 export const SearchScreen = () => {
+    const route = useRoute<any>();
     const [searchQuery, setSearchQuery] = useState('');
     const [result, setResult] = useState<Paper | null>(null);
     const [recentSearches, setRecentSearches] = useState<string[]>(['101', '102', '103']);
     const [hasSearched, setHasSearched] = useState(false);
-
     const handleSearch = (query: string = searchQuery) => {
         if (!query.trim()) return;
 
@@ -41,6 +42,14 @@ export const SearchScreen = () => {
             setRecentSearches(prev => [query, ...prev.slice(0, 4)]);
         }
     };
+
+    useEffect(() => {
+        if (route.params?.paperId) {
+            setSearchQuery(route.params.paperId);
+            handleSearch(route.params.paperId);
+        }
+    }, [route.params?.paperId]);
+
 
     const clearSearch = () => {
         setSearchQuery('');
@@ -55,7 +64,6 @@ export const SearchScreen = () => {
                 {/* 1️⃣ Header Section */}
                 <View style={styles.header}>
                     <View style={styles.headerTitleRow}>
-                        <Icon name="search-circle-outline" size={32} color={THEME_COLORS.white} style={styles.headerIcon} />
                         <Text style={styles.headerTitle}>Search Your Paper</Text>
                     </View>
                     <Text style={styles.headerSubtitle}>Enter your Paper ID to view presentation details</Text>
@@ -92,7 +100,7 @@ export const SearchScreen = () => {
                     {!result && (
                         <View style={styles.infoCard}>
                             <View style={styles.infoTitleRow}>
-                                <Icon name="bulb-outline" size={20} color={THEME_COLORS.accent} />
+                                <Icon name="information-circle-outline" size={20} color={THEME_COLORS.accent} />
                                 <Text style={styles.infoTitle}>Quick Tips</Text>
                             </View>
                             <View style={styles.infoList}>
@@ -228,9 +236,6 @@ const styles = StyleSheet.create({
         flexDirection: 'row',
         alignItems: 'center',
         marginBottom: 4,
-    },
-    headerIcon: {
-        marginRight: 8,
     },
     headerTitle: {
         ...typography.header,
