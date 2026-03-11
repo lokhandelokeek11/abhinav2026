@@ -7,12 +7,13 @@ import {
     TouchableOpacity,
     TextInput,
     SafeAreaView,
+    Linking,
 } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { spacing } from '../theme/spacing';
 import { typography } from '../theme/typography';
-import { papers, Paper } from '../data/papers';
+import { papersData } from '../data/papersData';
 
 const THEME_COLORS = {
     primary: '#0B4A6F',
@@ -28,18 +29,19 @@ const THEME_COLORS = {
 export const SearchScreen = () => {
     const route = useRoute<any>();
     const [searchQuery, setSearchQuery] = useState('');
-    const [result, setResult] = useState<Paper | null>(null);
-    const [recentSearches, setRecentSearches] = useState<string[]>(['101', '102', '103']);
+    const [result, setResult] = useState<typeof papersData[0] | null>(null);
+    const [recentSearches, setRecentSearches] = useState<string[]>(['ABH-A1', 'ABH-B1']);
     const [hasSearched, setHasSearched] = useState(false);
+
     const handleSearch = (query: string = searchQuery) => {
         if (!query.trim()) return;
 
-        const found = papers.find(p => p.id === query || p.id.toLowerCase() === query.toLowerCase());
+        const found = papersData.find(p => p.paperId === query || p.paperId.toLowerCase() === query.toLowerCase());
         setResult(found || null);
         setHasSearched(true);
 
-        if (found && !recentSearches.includes(query)) {
-            setRecentSearches(prev => [query, ...prev.slice(0, 4)]);
+        if (found && !recentSearches.includes(found.paperId)) {
+            setRecentSearches(prev => [found.paperId, ...prev.slice(0, 4)]);
         }
     };
 
@@ -50,11 +52,14 @@ export const SearchScreen = () => {
         }
     }, [route.params?.paperId]);
 
-
     const clearSearch = () => {
         setSearchQuery('');
         setResult(null);
         setHasSearched(false);
+    };
+
+    const handleOpenLink = (url: string) => {
+        Linking.openURL(url).catch(err => console.error("Couldn't load page", err));
     };
 
     return (
@@ -77,12 +82,12 @@ export const SearchScreen = () => {
                             <Icon name="search-outline" size={20} color={THEME_COLORS.textSecondary} style={styles.searchBoxIcon} />
                             <TextInput
                                 style={styles.input}
-                                placeholder="Enter Paper ID (e.g. 101)"
+                                placeholder="Enter Paper ID (e.g. ABH-A1)"
                                 placeholderTextColor={THEME_COLORS.textSecondary}
                                 value={searchQuery}
                                 onChangeText={setSearchQuery}
                                 onSubmitEditing={() => handleSearch()}
-                                keyboardType="numeric"
+                                autoCapitalize="characters"
                             />
                             {searchQuery.length > 0 && (
                                 <TouchableOpacity onPress={clearSearch}>
@@ -117,7 +122,7 @@ export const SearchScreen = () => {
                             <View style={styles.resultHeader}>
                                 <Text style={styles.resultType}>Presentation Details</Text>
                                 <View style={styles.idBadge}>
-                                    <Text style={styles.idBadgeText}>#{result.id}</Text>
+                                    <Text style={styles.idBadgeText}>#{result.paperId}</Text>
                                 </View>
                             </View>
 
@@ -129,7 +134,9 @@ export const SearchScreen = () => {
                                 <Icon name="people-outline" size={20} color={THEME_COLORS.primary} />
                                 <View style={styles.detailTextWrapper}>
                                     <Text style={styles.detailLabel}>Authors</Text>
-                                    <Text style={styles.detailValue}>{result.authors}</Text>
+                                    <Text style={styles.detailValue}>
+                                        {[result.leader, result.member1, result.member2, result.member3].filter(Boolean).join(', ')}
+                                    </Text>
                                 </View>
                             </View>
 
@@ -137,7 +144,7 @@ export const SearchScreen = () => {
                                 <Icon name="id-card-outline" size={20} color={THEME_COLORS.primary} />
                                 <View style={styles.detailTextWrapper}>
                                     <Text style={styles.detailLabel}>Team ID</Text>
-                                    <Text style={styles.detailValue}>{result.teamName}</Text>
+                                    <Text style={styles.detailValue}>{result.groupId}</Text>
                                 </View>
                             </View>
 
@@ -153,7 +160,7 @@ export const SearchScreen = () => {
                                 <Icon name="business-outline" size={20} color={THEME_COLORS.primary} />
                                 <View style={styles.detailTextWrapper}>
                                     <Text style={styles.detailLabel}>Physical Room</Text>
-                                    <Text style={styles.detailValue}>{result.roomNumber} ({result.floor} Floor)</Text>
+                                    <Text style={styles.detailValue}>TBA</Text>
                                 </View>
                             </View>
 
@@ -161,9 +168,16 @@ export const SearchScreen = () => {
                                 <Icon name="time-outline" size={20} color={THEME_COLORS.primary} />
                                 <View style={styles.detailTextWrapper}>
                                     <Text style={styles.detailLabel}>Presentation Time</Text>
-                                    <Text style={styles.detailValue}>{result.time}</Text>
+                                    <Text style={styles.detailValue}>TBA</Text>
                                 </View>
                             </View>
+
+                            {result.paperLink && (
+                                <TouchableOpacity style={styles.linkButton} onPress={() => handleOpenLink(result.paperLink)}>
+                                    <Icon name="document-text" size={20} color={THEME_COLORS.white} />
+                                    <Text style={styles.linkButtonText}>View Paper Document</Text>
+                                </TouchableOpacity>
+                            )}
 
                             <View style={styles.statusBox}>
                                 <Icon name="checkmark-circle" size={18} color={THEME_COLORS.success} />
@@ -391,6 +405,26 @@ const styles = StyleSheet.create({
         color: THEME_COLORS.textPrimary,
         fontWeight: 'bold',
         marginTop: 2,
+    },
+    subtext: {
+        fontSize: 12,
+        color: THEME_COLORS.textSecondary,
+        marginTop: 2,
+    },
+    linkButton: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        justifyContent: 'center',
+        backgroundColor: THEME_COLORS.accent,
+        padding: 14,
+        borderRadius: 12,
+        marginTop: spacing.m,
+    },
+    linkButtonText: {
+        color: THEME_COLORS.white,
+        fontWeight: 'bold',
+        marginLeft: 8,
+        fontSize: 16,
     },
     statusBox: {
         flexDirection: 'row',

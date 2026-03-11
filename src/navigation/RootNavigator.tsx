@@ -8,6 +8,10 @@ import { AboutScreen } from '../screens/AboutScreen';
 import { CommitteeScreen } from '../screens/CommitteeScreen';
 import { GuidelinesScreen } from '../screens/GuidelinesScreen';
 import { ConferenceTracksScreen } from '../screens/ConferenceTracksScreen';
+import { TrackPaperListScreen } from '../screens/TrackPaperListScreen';
+import { FacultySeatingScreen } from '../screens/FacultySeatingScreen';
+import { EventTimelineScreen } from '../screens/EventTimelineScreen';
+import { EventDayScheduleScreen } from '../screens/EventDayScheduleScreen';
 import { colors } from '../theme/colors';
 
 const Stack = createNativeStackNavigator();
@@ -62,6 +66,34 @@ export const RootNavigator = () => {
                 <Stack.Screen
                     name="ConferenceTracks"
                     component={ConferenceTracksScreen}
+                    options={{
+                        headerShown: false,
+                    }}
+                />
+                <Stack.Screen
+                    name="TrackPaperList"
+                    component={TrackPaperListScreen}
+                    options={{
+                        headerShown: false,
+                    }}
+                />
+                <Stack.Screen
+                    name="FacultySeating"
+                    component={FacultySeatingScreen}
+                    options={{
+                        headerShown: false,
+                    }}
+                />
+                <Stack.Screen
+                    name="EventTimeline"
+                    component={EventTimelineScreen}
+                    options={{
+                        headerShown: false,
+                    }}
+                />
+                <Stack.Screen
+                    name="EventDaySchedule"
+                    component={EventDayScheduleScreen}
                     options={{
                         headerShown: false,
                     }}
