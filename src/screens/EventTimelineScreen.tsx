@@ -118,7 +118,7 @@ const TimelineCard = ({ item, isLast, index }: { item: typeof TIMELINE_DATA[0], 
     );
 };
 
-export const ScheduleScreen = () => {
+export const EventTimelineScreen = () => {
     const navigation = useNavigation();
 
     return (

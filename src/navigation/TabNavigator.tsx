@@ -2,10 +2,9 @@ import React from 'react';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon from 'react-native-vector-icons/Ionicons';
 import { HomeScreen } from '../screens/HomeScreen';
-import { AlertsScreen } from '../screens/AlertsScreen';
-import { ScheduleScreen } from '../screens/ScheduleScreen';
+import { ScheduleMenuScreen } from '../screens/ScheduleMenuScreen';
 import { SearchScreen } from '../screens/SearchScreen';
-import { GroupListScreen } from '../screens/GroupListScreen';
+import { GroupTracksScreen } from '../screens/GroupTracksScreen';
 import { OptionsScreen } from '../screens/OptionsScreen';
 import { colors } from '../theme/colors';
 
@@ -48,9 +47,8 @@ export const TabNavigator = () => {
             })}
         >
             <Tab.Screen name="Home" component={HomeScreen} />
-            <Tab.Screen name="Groups" component={GroupListScreen} />
-            <Tab.Screen name="Alerts" component={AlertsScreen} />
-            <Tab.Screen name="Schedule" component={ScheduleScreen} />
+            <Tab.Screen name="Groups" component={GroupTracksScreen} />
+            <Tab.Screen name="Schedule" component={ScheduleMenuScreen} />
             <Tab.Screen name="Search" component={SearchScreen} />
             <Tab.Screen name="Options" component={OptionsScreen} />
         </Tab.Navigator>

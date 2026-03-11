@@ -59,6 +59,13 @@ export const OptionsScreen = () => {
                 />
 
                 <OptionCard
+                    icon="school-outline"
+                    title="Faculty Seating"
+                    subtitle="Faculty assigned to classrooms"
+                    onPress={() => navigation.navigate('FacultySeating')}
+                />
+
+                <OptionCard
                     icon="people-outline"
                     title="Committee"
                     subtitle="Organizing members of the conference"
@@ -88,21 +95,7 @@ export const OptionsScreen = () => {
                     onPress={() => navigation.navigate('About')}
                 />
 
-                <OptionCard
-                    icon="shield-checkmark-outline"
-                    title="Code of Conduct"
-                    subtitle="Read our community guidelines"
-                    onPress={() => { }}
-                />
-
                 <SectionHeader title="Help & Support" />
-
-                <OptionCard
-                    icon="help-circle-outline"
-                    title="FAQ"
-                    subtitle="Frequently asked questions"
-                    onPress={() => { }}
-                />
 
                 <OptionCard
                     icon="mail-outline"
@@ -115,6 +108,7 @@ export const OptionsScreen = () => {
             <View style={styles.footer}>
                 <Text style={styles.version}>App Version 1.0.0</Text>
                 <Text style={styles.copyright}>© 2026 PCCOE Computer Engineering</Text>
+                <Text style={[styles.copyright, { marginTop: 6 }]}>Developed by Lokeek and Bhagawati</Text>
             </View>
         </ScrollView>
     );
