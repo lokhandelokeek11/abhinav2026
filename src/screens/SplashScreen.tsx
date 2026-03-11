@@ -61,53 +61,17 @@ export const SplashScreen = () => {
     const navigation = useNavigation<NativeStackNavigationProp<any>>();
 
     // Animation Values
-    const logoScale = useRef(new Animated.Value(0.9)).current;
-    const logoOpacity = useRef(new Animated.Value(0)).current;
-    const haloScale = useRef(new Animated.Value(0.5)).current;
-    const haloOpacity = useRef(new Animated.Value(0)).current;
     const contentOpacity = useRef(new Animated.Value(0)).current;
     const progressWidth = useRef(new Animated.Value(0)).current;
 
     useEffect(() => {
         // Start Animations
         Animated.parallel([
-            // Logo Scale & Fade
-            Animated.timing(logoScale, {
-                toValue: 1,
-                duration: 800,
-                easing: Easing.out(Easing.back(1.5)),
-                useNativeDriver: true,
-            }),
-            Animated.timing(logoOpacity, {
-                toValue: 1,
-                duration: 800,
-                useNativeDriver: true,
-            }),
-            // Halo Animation
-            Animated.loop(
-                Animated.sequence([
-                    Animated.timing(haloScale, {
-                        toValue: 1.2,
-                        duration: 1500,
-                        useNativeDriver: true,
-                    }),
-                    Animated.timing(haloScale, {
-                        toValue: 0.8,
-                        duration: 1500,
-                        useNativeDriver: true,
-                    })
-                ])
-            ),
-            Animated.timing(haloOpacity, {
-                toValue: 0.8,
-                duration: 1000,
-                useNativeDriver: true,
-            }),
             // Content Fade In
             Animated.timing(contentOpacity, {
                 toValue: 1,
                 duration: 1000,
-                delay: 400,
+                delay: 200,
                 useNativeDriver: true,
             }),
             // Progress Bar Animation
@@ -115,7 +79,7 @@ export const SplashScreen = () => {
                 toValue: 1,
                 duration: 2500,
                 easing: Easing.linear,
-                useNativeDriver: false, // width doesn't support native driver
+                useNativeDriver: false,
             })
         ]).start();
 
@@ -151,29 +115,6 @@ export const SplashScreen = () => {
             ))}
 
             <View style={styles.centerContent}>
-                {/* Logo Section */}
-                <View style={styles.logoContainer}>
-                    <Animated.View style={[
-                        styles.halo,
-                        {
-                            opacity: haloOpacity,
-                            transform: [{ scale: haloScale }]
-                        }
-                    ]} />
-
-                    <Animated.Image
-                        source={require('../../assets/images/rd_club_logo.png')}
-                        style={[
-                            styles.logo,
-                            {
-                                opacity: logoOpacity,
-                                transform: [{ scale: logoScale }]
-                            }
-                        ]}
-                        resizeMode="contain"
-                    />
-                </View>
-
                 {/* Text Content */}
                 <Animated.View style={[styles.textContent, { opacity: contentOpacity }]}>
                     <View style={styles.titleRow}>
@@ -207,8 +148,6 @@ const styles = StyleSheet.create({
     container: {
         flex: 1,
         backgroundColor: BG_DARK,
-        justifyContent: 'center',
-        alignItems: 'center',
     },
     particle: {
         position: 'absolute',
@@ -218,33 +157,10 @@ const styles = StyleSheet.create({
         backgroundColor: CYAN,
     },
     centerContent: {
+        flex: 1,
         alignItems: 'center',
-        width: '100%',
-        marginTop: -40, // Slightly offset center
-    },
-    logoContainer: {
-        width: 200,
-        height: 200,
         justifyContent: 'center',
-        alignItems: 'center',
-        marginBottom: 40,
-    },
-    halo: {
-        position: 'absolute',
-        width: 180,
-        height: 180,
-        borderRadius: 90,
-        backgroundColor: WHITE,
-        shadowColor: WHITE,
-        shadowOffset: { width: 0, height: 0 },
-        shadowOpacity: 0.6,
-        shadowRadius: 15,
-        elevation: 8,
-    },
-    logo: {
-        width: 150,
-        height: 150,
-        zIndex: 1,
+        width: '100%',
     },
     textContent: {
         alignItems: 'center',
@@ -300,6 +216,7 @@ const styles = StyleSheet.create({
     footer: {
         position: 'absolute',
         bottom: 50,
+        width: '100%',
         paddingHorizontal: 20,
     },
     footerText: {
@@ -310,3 +227,4 @@ const styles = StyleSheet.create({
         opacity: 0.6,
     }
 });
+

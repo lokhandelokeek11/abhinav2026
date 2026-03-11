@@ -5,6 +5,7 @@ import { HomeScreen } from '../screens/HomeScreen';
 import { AlertsScreen } from '../screens/AlertsScreen';
 import { ScheduleScreen } from '../screens/ScheduleScreen';
 import { SearchScreen } from '../screens/SearchScreen';
+import { GroupListScreen } from '../screens/GroupListScreen';
 import { OptionsScreen } from '../screens/OptionsScreen';
 import { colors } from '../theme/colors';
 
@@ -20,6 +21,8 @@ export const TabNavigator = () => {
 
                     if (route.name === 'Home') {
                         iconName = focused ? 'home' : 'home-outline';
+                    } else if (route.name === 'Groups') {
+                        iconName = focused ? 'people' : 'people-outline';
                     } else if (route.name === 'Alerts') {
                         iconName = focused ? 'notifications' : 'notifications-outline';
                     } else if (route.name === 'Schedule') {
@@ -45,6 +48,7 @@ export const TabNavigator = () => {
             })}
         >
             <Tab.Screen name="Home" component={HomeScreen} />
+            <Tab.Screen name="Groups" component={GroupListScreen} />
             <Tab.Screen name="Alerts" component={AlertsScreen} />
             <Tab.Screen name="Schedule" component={ScheduleScreen} />
             <Tab.Screen name="Search" component={SearchScreen} />
