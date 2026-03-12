@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, StyleSheet, ScrollView, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet, ScrollView, TouchableOpacity, Linking } from 'react-native';
 import { colors } from '../theme/colors';
 import { spacing } from '../theme/spacing';
 import { typography } from '../theme/typography';
@@ -36,6 +36,22 @@ const OptionCard = ({ icon, title, subtitle, onPress }: { icon: string, title: s
         </View>
         <Icon name="chevron-forward" size={20} color={THEME_COLORS.textSecondary} />
     </TouchableOpacity>
+);
+
+const ContactCard = ({ name, role, phone }: { name: string, role: string, phone: string }) => (
+    <View style={styles.contactCard}>
+        <View style={styles.optionIconContainer}>
+            <Icon name="person-circle-outline" size={24} color={THEME_COLORS.primary} />
+        </View>
+        <View style={styles.optionTextContainer}>
+            <Text style={styles.optionTitle}>{name}</Text>
+            <Text style={styles.optionSubtitle}>{role}</Text>
+            <TouchableOpacity onPress={() => Linking.openURL(`tel:${phone}`)} style={styles.phoneButton}>
+                <Icon name="call-outline" size={14} color={THEME_COLORS.accent} />
+                <Text style={styles.phoneText}>{phone}</Text>
+            </TouchableOpacity>
+        </View>
+    </View>
 );
 
 export const OptionsScreen = () => {
@@ -97,12 +113,9 @@ export const OptionsScreen = () => {
 
                 <SectionHeader title="Help & Support" />
 
-                <OptionCard
-                    icon="mail-outline"
-                    title="Contact Support"
-                    subtitle="Need help? Reach out to us"
-                    onPress={() => { }}
-                />
+                <SectionHeader title="Contact Support" />
+                <ContactCard name="Smera Nimje" role="Vice President" phone="8975806285" />
+                <ContactCard name="Mitali Chaudhari" role="Secretary" phone="7498895707" />
             </View>
 
             <View style={styles.footer}>
@@ -166,6 +179,19 @@ const styles = StyleSheet.create({
         shadowOpacity: 0.1,
         shadowRadius: 2,
     },
+    contactCard: {
+        backgroundColor: THEME_COLORS.white,
+        flexDirection: 'row',
+        alignItems: 'center',
+        padding: spacing.m,
+        borderRadius: 16,
+        marginBottom: spacing.s,
+        elevation: 2,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.1,
+        shadowRadius: 2,
+    },
     optionIconContainer: {
         width: 44,
         height: 44,
@@ -187,6 +213,17 @@ const styles = StyleSheet.create({
         ...typography.caption,
         color: THEME_COLORS.textSecondary,
         marginTop: 2,
+    },
+    phoneButton: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginTop: 4,
+    },
+    phoneText: {
+        ...typography.caption,
+        color: THEME_COLORS.accent,
+        fontWeight: 'bold',
+        marginLeft: 4,
     },
     footer: {
         alignItems: 'center',

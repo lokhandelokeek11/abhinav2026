@@ -18,6 +18,29 @@ import { cepPapers } from '../data/cepPapers';
 
 const allPapers = [...papersData, ...cepPapers];
 
+const trackCoordinators: Record<string, {name: string, phone: string, room?: string}[]> = {
+    'Image Processing': [{ name: 'Prathamesh Marathe', phone: '8766663421' }],
+    'IoT & Robotics': [{ name: 'Rohit Lad', phone: '8669293154' }],
+    'Data Science & Big Data': [
+        { name: 'Smera Nimje', phone: '8975806285' },
+        { name: 'Vedant Maldhure', phone: '9970549885' }
+    ],
+    'Networks and Security': [{ name: 'Piyush Ahirao', phone: '8624807232' }],
+    'Computer Vision, AR & VR': [{ name: 'Sahil Patel', phone: '8809941523' }],
+    'Cognitive Computing & Machine Learning': [
+        { name: 'Rupam Karale', phone: '7387172482', room: 'Rooms 6208 / 6209' },
+        { name: 'Yash Gaikwad', phone: '9421686323', room: 'Rooms 6208 / 6209' },
+        { name: 'Pranali Patil', phone: '9730490305', room: 'Room 6118' },
+        { name: 'Aditi More', phone: '7083873818', room: 'Room 6118' },
+        { name: 'Sayali Pawar', phone: '8459386962', room: 'Room 6119' }
+    ],
+    'CEP': [
+        { name: 'Pruthviraj Kale', phone: '8308193006', room: 'Room 6206' },
+        { name: 'Kaustabh Kumbhare', phone: '9309898844', room: 'Room 6218' },
+        { name: 'Aayush Kolhe', phone: '8767270823', room: 'Room 6201' }
+    ]
+};
+
 const THEME_COLORS = {
     primary: '#0B4A6F',
     accent: '#2E7BCF',
@@ -64,6 +87,8 @@ export const SearchScreen = () => {
     const handleOpenLink = (url: string) => {
         Linking.openURL(url).catch(err => console.error("Couldn't load page", err));
     };
+
+    const coordinators = result ? trackCoordinators[result.track] || [] : [];
 
     return (
         <SafeAreaView style={styles.container}>
@@ -192,13 +217,22 @@ export const SearchScreen = () => {
                                 </View>
                             </View>
 
-                            {(result as any).paperLink && (
-                                <TouchableOpacity style={styles.linkButton} onPress={() => handleOpenLink((result as any).paperLink)}>
-                                    <Icon name="document-text" size={20} color={THEME_COLORS.white} />
-                                    <Text style={styles.linkButtonText}>View Paper Document</Text>
-                                </TouchableOpacity>
+                            {coordinators.length > 0 && (
+                                <View style={styles.coordinatorBox}>
+                                    <Text style={styles.coordinatorHeader}>
+                                        {coordinators.length > 1 ? 'Student Coordinators' : 'Student Coordinator'}
+                                    </Text>
+                                    <View style={styles.coordinatorList}>
+                                        {coordinators.map((c, i) => (
+                                            <TouchableOpacity key={i} onPress={() => Linking.openURL(`tel:${c.phone}`)}>
+                                                <Text style={styles.coordinatorText}>
+                                                    {c.name} {c.room && `(${c.room})`} – <Text style={styles.coordinatorPhone}>{c.phone}</Text>
+                                                </Text>
+                                            </TouchableOpacity>
+                                        ))}
+                                    </View>
+                                </View>
                             )}
-
                             <View style={styles.statusBox}>
                                 <Icon name="checkmark-circle" size={18} color={THEME_COLORS.success} />
                                 <Text style={styles.statusText}>Report to your assigned room 15 mins early.</Text>
@@ -445,6 +479,34 @@ const styles = StyleSheet.create({
         fontWeight: 'bold',
         marginLeft: 8,
         fontSize: 16,
+    },
+    coordinatorBox: {
+        backgroundColor: '#F5F8FA',
+        padding: spacing.m,
+        borderRadius: 12,
+        marginTop: spacing.s,
+        marginBottom: spacing.m,
+        borderLeftWidth: 4,
+        borderLeftColor: THEME_COLORS.primary,
+    },
+    coordinatorHeader: {
+        ...typography.caption,
+        color: THEME_COLORS.textSecondary,
+        fontWeight: 'bold',
+        textTransform: 'uppercase',
+        marginBottom: 6,
+    },
+    coordinatorList: {
+        flexDirection: 'column',
+    },
+    coordinatorText: {
+        ...typography.body,
+        color: THEME_COLORS.textPrimary,
+        fontWeight: '600',
+        marginBottom: 4,
+    },
+    coordinatorPhone: {
+        color: THEME_COLORS.accent,
     },
     statusBox: {
         flexDirection: 'row',
