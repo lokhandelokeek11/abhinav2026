@@ -13,7 +13,9 @@ import { useNavigation, useRoute } from '@react-navigation/native';
 import { spacing } from '../theme/spacing';
 import { typography } from '../theme/typography';
 import { papersData } from '../data/papersData';
+import { cepPapers } from '../data/cepPapers';
 
+const allPapers = [...papersData, ...cepPapers];
 const THEME_COLORS = {
     primary: '#0B4A6F',
     accent: '#2E7BCF',
@@ -29,41 +31,49 @@ export const TrackPaperListScreen = () => {
     const route = useRoute<any>();
     const track = route.params?.track || '';
 
+    const targetTrack = track === 'Community Engagement Project (CEP)' ? 'CEP' : track;
+
     const [searchQuery, setSearchQuery] = useState('');
-    const [filteredPapers, setFilteredPapers] = useState(papersData.filter(p => p.track === track));
+    const [filteredPapers, setFilteredPapers] = useState(allPapers.filter(p => p.track === targetTrack));
 
     useEffect(() => {
         const lowerQuery = searchQuery.toLowerCase();
-        const filtered = papersData.filter(paper => {
-            if (paper.track !== track) return false;
+        const filtered = allPapers.filter(paper => {
+            if (paper.track !== targetTrack) return false;
             return (
                 paper.paperId.toLowerCase().includes(lowerQuery) ||
                 paper.leader.toLowerCase().includes(lowerQuery)
             );
         });
         setFilteredPapers(filtered);
-    }, [searchQuery, track]);
+    }, [searchQuery, targetTrack]);
 
     const renderHeader = () => (
         <View style={styles.tableHeader}>
-            <Text style={[styles.headerText, styles.colId]}>Paper ID</Text>
+            {targetTrack !== 'CEP' && (
+                <Text style={[styles.headerText, styles.colId]}>Paper ID</Text>
+            )}
             <Text style={[styles.headerText, styles.colGroup]}>Group ID</Text>
             <Text style={[styles.headerText, styles.colLeader]}>Leader</Text>
             <Text style={[styles.headerText, styles.colTitle]}>Title</Text>
         </View>
     );
 
-    const renderItem = ({ item }: { item: typeof papersData[0] }) => (
+    const renderItem = ({ item }: { item: typeof allPapers[0] }) => (
         <TouchableOpacity
             style={styles.row}
             onPress={() => navigation.navigate('Search', { paperId: item.paperId })}
             activeOpacity={0.7}
         >
-            <View style={styles.colId}>
-                <Text style={styles.idText}>{item.paperId}</Text>
-            </View>
+            {targetTrack !== 'CEP' && (
+                <View style={styles.colId}>
+                    <Text style={styles.idText}>{item.paperId}</Text>
+                </View>
+            )}
             <View style={styles.colGroup}>
-                <Text style={styles.groupText}>{item.groupId}</Text>
+                <Text style={targetTrack === 'CEP' ? styles.idText : styles.groupText}>
+                    {targetTrack === 'CEP' ? item.paperId : (item as any).groupId}
+                </Text>
             </View>
             <View style={styles.colLeader}>
                 <Text style={styles.leaderText}>{item.leader}</Text>

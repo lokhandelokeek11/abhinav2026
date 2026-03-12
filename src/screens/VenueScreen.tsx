@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { View, Text, StyleSheet, FlatList, TouchableOpacity } from 'react-native';
+import Icon from 'react-native-vector-icons/Ionicons';
 import { colors } from '../theme/colors';
 import { spacing } from '../theme/spacing';
 import { typography } from '../theme/typography';
@@ -17,6 +18,23 @@ export const VenueScreen = () => {
         <View style={styles.container}>
             <View style={styles.header}>
                 <Text style={styles.title}>Venues & Classrooms</Text>
+            </View>
+
+            <View style={styles.infoCard}>
+                <View style={styles.infoHeader}>
+                    <Icon name="information-circle-outline" size={20} color={colors.primary} />
+                    <Text style={styles.infoTitle}>Room Numbering Guide</Text>
+                </View>
+                <Text style={styles.infoText}>
+                    <Text style={{fontWeight: 'bold'}}>Room: 6107</Text>{'\n'}
+                    Building: 6{'\n'}
+                    Floor: 1st Floor{'\n'}
+                    Classroom: 07{'\n\n'}
+                    <Text style={{fontWeight: 'bold'}}>Room: 6210</Text>{'\n'}
+                    Building: 6{'\n'}
+                    Floor: 2nd Floor{'\n'}
+                    Classroom: 10
+                </Text>
             </View>
 
             <View style={styles.tabContainer}>
@@ -72,6 +90,36 @@ const styles = StyleSheet.create({
         padding: 4,
         borderWidth: 1,
         borderColor: colors.border,
+    },
+    infoCard: {
+        backgroundColor: colors.surface,
+        marginHorizontal: spacing.m,
+        marginBottom: spacing.m,
+        padding: spacing.m,
+        borderRadius: 12,
+        borderWidth: 1,
+        borderColor: colors.border,
+        elevation: 2,
+        shadowColor: '#000',
+        shadowOffset: { width: 0, height: 1 },
+        shadowOpacity: 0.1,
+        shadowRadius: 2,
+    },
+    infoHeader: {
+        flexDirection: 'row',
+        alignItems: 'center',
+        marginBottom: spacing.s,
+    },
+    infoTitle: {
+        ...typography.subtitle,
+        color: colors.primary,
+        fontWeight: 'bold',
+        marginLeft: spacing.xs,
+    },
+    infoText: {
+        ...typography.caption,
+        color: colors.text.secondary,
+        lineHeight: 20,
     },
     tab: {
         flex: 1,

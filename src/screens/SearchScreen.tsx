@@ -14,6 +14,9 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { spacing } from '../theme/spacing';
 import { typography } from '../theme/typography';
 import { papersData } from '../data/papersData';
+import { cepPapers } from '../data/cepPapers';
+
+const allPapers = [...papersData, ...cepPapers];
 
 const THEME_COLORS = {
     primary: '#0B4A6F',
@@ -29,14 +32,14 @@ const THEME_COLORS = {
 export const SearchScreen = () => {
     const route = useRoute<any>();
     const [searchQuery, setSearchQuery] = useState('');
-    const [result, setResult] = useState<typeof papersData[0] | null>(null);
+    const [result, setResult] = useState<typeof allPapers[0] | null>(null);
     const [recentSearches, setRecentSearches] = useState<string[]>(['ABH-A1', 'ABH-B1']);
     const [hasSearched, setHasSearched] = useState(false);
 
     const handleSearch = (query: string = searchQuery) => {
         if (!query.trim()) return;
 
-        const found = papersData.find(p => p.paperId === query || p.paperId.toLowerCase() === query.toLowerCase());
+        const found = allPapers.find(p => p.paperId === query || p.paperId.toLowerCase() === query.toLowerCase());
         setResult(found || null);
         setHasSearched(true);
 
@@ -121,9 +124,11 @@ export const SearchScreen = () => {
                         <View style={styles.resultCard}>
                             <View style={styles.resultHeader}>
                                 <Text style={styles.resultType}>Presentation Details</Text>
-                                <View style={styles.idBadge}>
-                                    <Text style={styles.idBadgeText}>#{result.paperId}</Text>
-                                </View>
+                                {result.track !== 'CEP' && (
+                                    <View style={styles.idBadge}>
+                                        <Text style={styles.idBadgeText}>#{result.paperId}</Text>
+                                    </View>
+                                )}
                             </View>
 
                             <Text style={styles.paperTitle}>{result.title}</Text>
@@ -133,9 +138,9 @@ export const SearchScreen = () => {
                             <View style={styles.detailRow}>
                                 <Icon name="people-outline" size={20} color={THEME_COLORS.primary} />
                                 <View style={styles.detailTextWrapper}>
-                                    <Text style={styles.detailLabel}>Authors</Text>
+                                    <Text style={styles.detailLabel}>{result.track === 'CEP' ? 'Team Leader' : 'Authors'}</Text>
                                     <Text style={styles.detailValue}>
-                                        {[result.leader, result.member1, result.member2, result.member3].filter(Boolean).join(', ')}
+                                        {[result.leader, (result as any).member1, (result as any).member2, (result as any).member3].filter(Boolean).join(', ')}
                                     </Text>
                                 </View>
                             </View>
@@ -143,8 +148,10 @@ export const SearchScreen = () => {
                             <View style={styles.detailRow}>
                                 <Icon name="id-card-outline" size={20} color={THEME_COLORS.primary} />
                                 <View style={styles.detailTextWrapper}>
-                                    <Text style={styles.detailLabel}>Team ID</Text>
-                                    <Text style={styles.detailValue}>{result.groupId}</Text>
+                                    <Text style={styles.detailLabel}>Group ID</Text>
+                                    <Text style={styles.detailValue}>
+                                        {result.track === 'CEP' ? result.paperId : result.groupId}
+                                    </Text>
                                 </View>
                             </View>
 
@@ -160,7 +167,20 @@ export const SearchScreen = () => {
                                 <Icon name="business-outline" size={20} color={THEME_COLORS.primary} />
                                 <View style={styles.detailTextWrapper}>
                                     <Text style={styles.detailLabel}>Physical Room</Text>
-                                    <Text style={styles.detailValue}>TBA</Text>
+                                    <Text style={styles.detailValue}>
+                                        {(() => {
+                                            switch (result.track) {
+                                                case 'Image Processing': return 'Room 6107';
+                                                case 'IoT & Robotics': return 'Room 6210';
+                                                case 'Data Science & Big Data': return 'Room 6115';
+                                                case 'Networks and Security': return 'Room 6104';
+                                                case 'Computer Vision, AR & VR': return 'Room 6109';
+                                                case 'Cognitive Computing & Machine Learning': return 'Rooms 6208, 6209, 6118, 6119';
+                                                case 'CEP': return 'Rooms 6206, 6218, 6201';
+                                                default: return 'TBA';
+                                            }
+                                        })()}
+                                    </Text>
                                 </View>
                             </View>
 
@@ -168,12 +188,12 @@ export const SearchScreen = () => {
                                 <Icon name="time-outline" size={20} color={THEME_COLORS.primary} />
                                 <View style={styles.detailTextWrapper}>
                                     <Text style={styles.detailLabel}>Presentation Time</Text>
-                                    <Text style={styles.detailValue}>TBA</Text>
+                                    <Text style={styles.detailValue}>11 AM - 1 PM</Text>
                                 </View>
                             </View>
 
-                            {result.paperLink && (
-                                <TouchableOpacity style={styles.linkButton} onPress={() => handleOpenLink(result.paperLink)}>
+                            {(result as any).paperLink && (
+                                <TouchableOpacity style={styles.linkButton} onPress={() => handleOpenLink((result as any).paperLink)}>
                                     <Icon name="document-text" size={20} color={THEME_COLORS.white} />
                                     <Text style={styles.linkButtonText}>View Paper Document</Text>
                                 </TouchableOpacity>

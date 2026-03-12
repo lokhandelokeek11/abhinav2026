@@ -16,67 +16,95 @@ const THEME_COLORS = {
     border: '#EEEEEE',
 };
 
-const SCHEDULE_DATA = [
+type ScheduleItem = {
+    id: string;
+    time: string;
+    title: string;
+    icon: string;
+    location?: string;
+    speaker?: string;
+    isBreak?: boolean;
+    tracks?: string[];
+    rooms?: string[];
+};
+
+const SCHEDULE_DATA: ScheduleItem[] = [
     {
         id: '1',
-        time: '09:00 AM – 09:30 AM',
-        title: 'Registration & Welcome',
-        location: 'Venue: Main Lobby',
+        time: '9:55 AM',
+        title: 'Guest Arrival',
         icon: 'person-add-outline'
     },
     {
         id: '2',
-        time: '09:30 AM – 10:00 AM',
-        title: 'Inauguration Ceremony',
-        speaker: 'Speaker: Dr. Sonali Patil',
-        location: 'Venue: Auditorium',
+        time: '10:00 AM',
+        title: 'Opening Ceremony (Saraswati Poojan)',
         icon: 'ribbon-outline'
     },
     {
         id: '3',
-        time: '10:00 AM – 11:30 AM',
-        title: 'Paper Presentations – Session 1',
-        tracks: ['Image Processing', 'IoT & Robotics'],
-        rooms: ['6102 – Image Processing', '6103 – IoT & Robotics'],
-        icon: 'document-text-outline'
+        time: '10:05 AM',
+        title: 'Felicitation of Chief Guest',
+        icon: 'gift-outline'
     },
     {
         id: '4',
-        time: '11:30 AM – 12:00 PM',
-        title: 'Tea Break',
-        location: 'Venue: Conference Hall Lobby',
-        icon: 'cafe-outline',
-        isBreak: true,
+        time: '10:10 AM',
+        title: 'Address by General Chair',
+        icon: 'mic-outline'
     },
     {
         id: '5',
-        time: '12:00 PM – 01:30 PM',
-        title: 'Paper Presentations – Session 2',
-        tracks: ['Data Science & Big Data', 'Networks & Security'],
-        rooms: ['6104 – Data Science', '6105 – Networks & Security'],
-        icon: 'document-text-outline'
+        time: '10:15 AM',
+        title: 'Address by the Head of Department',
+        icon: 'mic-outline'
     },
     {
         id: '6',
-        time: '01:30 PM – 02:30 PM',
+        time: '10:20 AM',
+        title: 'Chief Guest Address',
+        icon: 'mic-outline'
+    },
+    {
+        id: '7',
+        time: '10:25 AM',
+        title: 'Vote of Thanks',
+        icon: 'heart-outline'
+    },
+    {
+        id: '8',
+        time: '10:30 AM onwards',
+        title: 'Technical Paper & CEP Poster Presentations',
+        location: 'Parallel technical sessions begin in allocated classrooms.',
+        icon: 'easel-outline'
+    },
+    {
+        id: '9',
+        time: '11:00 AM – 1:00 PM',
+        title: 'Session 1',
+        speaker: 'Technical Paper Presentations',
+        icon: 'document-text-outline'
+    },
+    {
+        id: '10',
+        time: '1:00 PM – 2:00 PM',
         title: 'Lunch Break',
-        location: 'Venue: Cafeteria',
+        location: 'Venue: Cafeteria / Dining Area',
         icon: 'restaurant-outline',
         isBreak: true,
     },
     {
-        id: '7',
-        time: '02:30 PM – 04:00 PM',
-        title: 'Paper Presentations – Session 3',
-        tracks: ['Computer Vision', 'Cognitive Computing & ML'],
-        rooms: ['6106 – Computer Vision', '6107 – AI & ML'],
+        id: '11',
+        time: '2:00 PM – 3:00 PM',
+        title: 'Session 2',
+        speaker: 'Technical Paper Presentations Continue',
         icon: 'document-text-outline'
     },
     {
-        id: '8',
-        time: '04:00 PM – 04:30 PM',
-        title: 'Valedictory & Awards',
-        location: 'Venue: Auditorium',
+        id: '12',
+        time: '3:30 PM – 4:30 PM',
+        title: 'Valedictory Session',
+        location: 'Closing ceremony and appreciation of participants.',
         icon: 'trophy-outline'
     }
 ];

@@ -8,10 +8,16 @@ export interface Room {
 }
 
 export const venues: Room[] = [
-    { id: 'v1', roomNumber: 'Room 101', floor: 'Ground', sessionName: 'Opening Keynote', time: '09:00 AM - 10:00 AM', status: 'Completed' },
-    { id: 'v2', roomNumber: 'Room 201', floor: '1st', sessionName: 'AI Panel Discussion', time: '10:30 AM - 12:00 PM', status: 'Ongoing' },
-    { id: 'v3', roomNumber: 'Room 305', floor: '2nd', sessionName: 'Cybersecurity Workshop', time: '01:00 PM - 03:00 PM', status: 'Upcoming' },
-    { id: 'v4', roomNumber: 'Room 402', floor: '3rd', sessionName: 'Startup Pitching', time: '03:30 PM - 05:00 PM', status: 'Upcoming' },
-    { id: 'v5', roomNumber: 'Room 102', floor: 'Ground', sessionName: 'Web Dev Best Practices', time: '02:00 PM - 04:00 PM', status: 'Upcoming' },
-    { id: 'v6', roomNumber: 'Room 205', floor: '1st', sessionName: 'Mobile Dev Future', time: '11:00 AM - 12:30 PM', status: 'Ongoing' },
+    { id: 'v1', roomNumber: 'Room 6107', floor: '1st', sessionName: 'Image Processing', time: 'Morning Session', status: 'Upcoming' },
+    { id: 'v2', roomNumber: 'Room 6210', floor: '2nd', sessionName: 'IoT & Robotics', time: 'Morning Session', status: 'Upcoming' },
+    { id: 'v3', roomNumber: 'Room 6115', floor: '1st', sessionName: 'Data Science & Big Data', time: 'Morning Session', status: 'Upcoming' },
+    { id: 'v4', roomNumber: 'Room 6104', floor: '1st', sessionName: 'Networks and Security', time: 'Morning Session', status: 'Upcoming' },
+    { id: 'v5', roomNumber: 'Room 6109', floor: '1st', sessionName: 'Computer Vision / AR / VR', time: 'Morning Session', status: 'Upcoming' },
+    { id: 'v6', roomNumber: 'Room 6208', floor: '2nd', sessionName: 'Cognitive Computing & ML', time: 'Morning Session', status: 'Upcoming' },
+    { id: 'v7', roomNumber: 'Room 6209', floor: '2nd', sessionName: 'Cognitive Computing & ML', time: 'Morning Session', status: 'Upcoming' },
+    { id: 'v8', roomNumber: 'Room 6118', floor: '1st', sessionName: 'Cognitive Computing & ML', time: 'Morning Session', status: 'Upcoming' },
+    { id: 'v9', roomNumber: 'Room 6119', floor: '1st', sessionName: 'Cognitive Computing & ML', time: 'Morning Session', status: 'Upcoming' },
+    { id: 'v10', roomNumber: 'Room 6206', floor: '2nd', sessionName: 'CEP', time: 'Morning Session', status: 'Upcoming' },
+    { id: 'v11', roomNumber: 'Room 6218', floor: '2nd', sessionName: 'CEP', time: 'Morning Session', status: 'Upcoming' },
+    { id: 'v12', roomNumber: 'Room 6201', floor: '2nd', sessionName: 'CEP', time: 'Morning Session', status: 'Upcoming' },
 ];

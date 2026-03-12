@@ -29,6 +29,7 @@ const TRACKS = [
     { title: 'Networks and Security', icon: 'shield-checkmark-outline' },
     { title: 'Computer Vision, AR & VR', icon: 'eye-outline' },
     { title: 'Cognitive Computing & Machine Learning', icon: 'bulb-outline' },
+    { title: 'Community Engagement Project (CEP)', subtitle: 'Second Year Community Engagement Projects', icon: 'people-outline' },
 ];
 
 export const GroupTracksScreen = () => {
@@ -60,7 +61,12 @@ export const GroupTracksScreen = () => {
                             <View style={styles.cardHeader}>
                                 <View style={styles.cardTitleRow}>
                                     <Icon name={track.icon} size={24} color={THEME_COLORS.primary} style={styles.cardIcon} />
-                                    <Text style={styles.cardTitle}>{track.title}</Text>
+                                    <View style={styles.titleContainer}>
+                                        <Text style={styles.cardTitle}>{track.title}</Text>
+                                        {track.subtitle && (
+                                            <Text style={styles.cardSubtitle}>{track.subtitle}</Text>
+                                        )}
+                                    </View>
                                 </View>
                                 <Icon name="chevron-forward" size={20} color={THEME_COLORS.textSecondary} />
                             </View>
@@ -141,6 +147,14 @@ const styles = StyleSheet.create({
         ...typography.subtitle,
         color: THEME_COLORS.textPrimary,
         fontWeight: '600',
+    },
+    titleContainer: {
+        flex: 1,
+    },
+    cardSubtitle: {
+        ...typography.caption,
+        color: THEME_COLORS.textSecondary,
+        marginTop: 2,
     },
 });
 

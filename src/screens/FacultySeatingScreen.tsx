@@ -16,14 +16,18 @@ const THEME_COLORS = {
 };
 
 const facultyData = [
-    { id: '1', room: 'Room 6101', faculty: 'Dr. Sonali Patil', track: 'Inauguration', session: 'Morning Session' },
-    { id: '2', room: 'Room 6102', faculty: 'Dr. Meghana Lokhande', track: 'Image Processing', session: 'Morning Session' },
-    { id: '3', room: 'Room 6103', faculty: 'Dr. Anagha Chaudhari', track: 'Data Science', session: 'Morning Session' },
-    { id: '4', room: 'Room 6104', faculty: 'Dr. Asmita Manna', track: 'IoT & Robotics', session: 'Afternoon Session' },
-    { id: '5', room: 'Room 6105', faculty: 'Prof. Vikram Malhotra', track: 'Networks & Security', session: 'Afternoon Session' },
-    { id: '6', room: 'Room 6106', faculty: 'Dr. Sarah Jenkins', track: 'AI & Machine Learning', session: 'Morning Session' },
-    { id: '7', room: 'Room 6107', faculty: 'Prof. Rahul Deshmukh', track: 'Computer Vision', session: 'Afternoon Session' },
-    { id: '8', room: 'Room 6108', faculty: 'Dr. Pooja Kulkarni', track: 'Poster Presentation', session: 'Morning Session' },
+    { id: '1', room: 'Room 6107', faculty: 'Dr. Namrata Gawande, Prof. Harshada Mhaske', track: 'Image Processing', session: 'Morning Session' },
+    { id: '2', room: 'Room 6210', faculty: 'Dr. Priya A. Surana, Dr. Smita C. Khairnar', track: 'IoT & Robotics', session: 'Morning Session' },
+    { id: '3', room: 'Room 6115', faculty: 'Dr. Sarika T. Deokate, Dr. Pooja V. Bidwai', track: 'Data Science & Big Data', session: 'Morning Session' },
+    { id: '4', room: 'Room 6104', faculty: 'Dr. Pravin Shantaram Game, Prof. Atul G. Pawar', track: 'Networks & Security', session: 'Morning Session' },
+    { id: '5', room: 'Room 6109', faculty: 'Dr. Mubin Shoukat Tamboli, Dr. Srinivas Ambala', track: 'Computer Vision / AR / VR', session: 'Morning Session' },
+    { id: '6', room: 'Room 6208', faculty: 'Dr. Aparna Joshi', track: 'Cognitive Computing & ML', session: 'Morning Session' },
+    { id: '7', room: 'Room 6209', faculty: 'Dr. Aparna Joshi', track: 'Cognitive Computing & ML', session: 'Morning Session' },
+    { id: '8', room: 'Room 6118', faculty: 'Prof. Sushma R. Vispute', track: 'Cognitive Computing & ML', session: 'Morning Session' },
+    { id: '9', room: 'Room 6119', faculty: 'Prof. Dhanashree Patil', track: 'Cognitive Computing & ML', session: 'Morning Session' },
+    { id: '10', room: 'Room 6206', faculty: 'Mrs. Ashwini Matange', track: 'CEP', session: 'Morning Session' },
+    { id: '11', room: 'Room 6218', faculty: 'Dr. Supriya Mahadevkar', track: 'CEP', session: 'Morning Session' },
+    { id: '12', room: 'Room 6201', faculty: 'Not specified in document', track: 'CEP', session: 'Morning Session' },
 ];
 
 export const FacultySeatingScreen = () => {
